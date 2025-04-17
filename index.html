@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Залізничний транспорт: історія та ТОП‑10 поїздів</title>
+  <!-- Підключення Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" crossorigin=""/>
+  <style>
+    /* Загальні стилі */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5d76e;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+    header, footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+    nav {
+      background-color: #444;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 60px;
+    }
+    h2 {
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+    h3 {
+      margin-top: 0;
+    }
+    p {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+    figure {
+      margin: 20px auto;
+      max-width: 800px;
+      text-align: center;
+    }
+    figure img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+    }
+    figcaption {
+      font-style: italic;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    /* Стилізація блоку із ТОП‑10 поїздів */
+    .train {
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    /* Таймлайн для історії */
+    .timeline {
+      border-left: 2px solid #333;
+      margin: 20px 0;
+      padding-left: 20px;
+    }
+    .timeline-item {
+      margin: 10px 0;
+    }
+    .timeline-item span.year {
+      font-weight: bold;
+    }
+    /* Стилі для інтерактивної карти */
+    #map {
+      height: 500px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Шапка сайту -->
+  <header>
+    <h1>Залізничний транспорт: історія та ТОП‑10 поїздів</h1>
+    <p>Детальний огляд історії української і світової залізниці, найцікавіших фактів і сучасних технологій перевезень</p>
+  </header>
+
+  <!-- Навігаційне меню -->
+  <nav>
+    <a href="#history-ua">Історія України</a>
+    <a href="#world-history">Світова історія</a>
+    <a href="#top-trains">ТОП‑10 поїздів</a>
+    <a href="#interactive-map">Інтерактивна карта</a>
+  </nav>
+
+  <!-- Основний контент -->
+  <main>
+    <!-- Секція: Історія залізничного транспорту України -->
+    <section id="history-ua">
+      <h2>Історія залізничного транспорту України</h2>
+      <p>
+        Розвиток залізничного транспорту в Україні розпочався у другій половині XIX століття, коли з’явилися перші колії, що зв’язували великі міста імперії. Парові локомотиви стали символом індустріалізації, відкриваючи нові горизонти для економічного зростання.
+      </p>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Old_steam_locomotive.jpg" alt="Історичний паровоз">
+        <figcaption>Історичний паровоз – перший символ залізничного прогресу (джерело: Wikimedia Commons)</figcaption>
+      </figure>
+      <p>
+        Протягом століть українська залізниця зазнавала численних змін – від модернізації інфраструктури до впровадження сучасних електрифікованих ліній і високотехнологічних систем безпеки. Незважаючи на виклики воєнних конфліктів та економічних періодів, залізниця лишається життєво важливою артерією перевезень.
+      </p>
+      <!-- Таймлайн -->
+      <div class="timeline">
+        <div class="timeline-item"><span class="year">1832:</span> Перші експерименти з паровими машинами на території сучасної України.</div>
+        <div class="timeline-item"><span class="year">1860:</span> Відкриття першої громадської залізничної лінії.</div>
+        <div class="timeline-item"><span class="year">1918:</span> Спроби модернізації залізничної мережі під час революційних подій.</div>
+        <div class="timeline-item"><span class="year">1941–1945:</span> Військові конфлікти та відновлення залізничного транспорту.</div>
+        <div class="timeline-item"><span class="year">1991:</span> Незалежність України та трансформація залізничної інфраструктури.</div>
+        <div class="timeline-item"><span class="year">2000:</span> Запуск програм модернізації та електрифікації залізниць.</div>
+        <div class="timeline-item"><span class="year">2010:</span> Впровадження високотехнологічних систем безпеки та комфорту.</div>
+        <div class="timeline-item"><span class="year">2020:</span> Розвиток високошвидкісних залізничних коридорів та інтеграція з європейською мережею.</div>
+      </div>
+    </section>
+
+    <!-- Секція: Всесвітня історія поїздів -->
+    <section id="world-history">
+      <h2>Всесвітня історія поїздів</h2>
+      <p>
+        Поїзди зіграли ключову роль у глобальній індустріалізації, започаткувавши нову еру швидких перевезень. Перші парові локомотиви, такі як "Stephenson's Rocket", змінили спосіб пересування людей і товарів, відкривши шлях до економічних трансформацій.
+      </p>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Stephenson%27s_Rocket.jpg" alt="Stephenson's Rocket">
+        <figcaption>Stephenson's Rocket – один із перших революційних локомотивів (джерело: Wikimedia Commons)</figcaption>
+      </figure>
+      <p>
+        В різних куточках світу технології залізничного транспорту розвивалися по-різному: від американських паровозів до модерних високошвидкісних систем у Європі та Азії. Розвиток цих технологій побудував міцну інфраструктуру, що з’єднує цілі континенти.
+      </p>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Locomotion_No._1.jpg" alt="Locomotion No. 1">
+        <figcaption>Locomotion No. 1 – перший комерційний локомотив (джерело: Wikimedia Commons)</figcaption>
+      </figure>
+    </section>
+
+    <!-- Секція: ТОП‑10 найпопулярніших поїздів -->
+    <section id="top-trains">
+      <h2>ТОП‑10 найпопулярніших поїздів</h2>
+      
+      <!-- 1. Shinkansen -->
+      <div class="train">
+        <h3>1. Shinkansen (Японія)</h3>
+        <p><strong>Країна:</strong> Японія</p>
+        <p><strong>Виробники:</strong> Kawasaki Heavy Industries, Hitachi, Nippon Sharyo</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/500_series_Shinkansen.jpg" alt="Shinkansen">
+          <figcaption>Shinkansen — японський високошвидкісний поїзд (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 2. TGV -->
+      <div class="train">
+        <h3>2. TGV (Франція)</h3>
+        <p><strong>Країна:</strong> Франція</p>
+        <p><strong>Виробник:</strong> Alstom</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/TGV_Alstom_%28cropped%29.jpg" alt="TGV">
+          <figcaption>TGV — французький високошвидкісний поїзд (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 3. Eurostar -->
+      <div class="train">
+        <h3>3. Eurostar (Міжнародний)</h3>
+        <p><strong>Країна:</strong> Об'єднане Королівство, Франція, Бельгія</p>
+        <p><strong>Виробник:</strong> Alstom</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Eurostar_e320_in_Paris.jpg" alt="Eurostar">
+          <figcaption>Eurostar — поїзд, що сполучає країни Європи (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 4. ICE -->
+      <div class="train">
+        <h3>4. ICE (Німеччина)</h3>
+        <p><strong>Країна:</strong> Німеччина</p>
+        <p><strong>Виробник:</strong> Siemens</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/ICE_3_in_Kirchdorf.jpg" alt="ICE">
+          <figcaption>ICE — німецький високошвидкісний поїзд (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 5. Pendolino -->
+      <div class="train">
+        <h3>5. Pendolino (Італія)</h3>
+        <p><strong>Країна:</strong> Італія</p>
+        <p><strong>Виробник:</strong> Fiat Ferroviaria (тепер Alstom)</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Pendolino_trains.jpg" alt="Pendolino">
+          <figcaption>Pendolino — поїзд, відомий своїм нахилом для проходження кривих залізниць (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 6. Acela Express -->
+      <div class="train">
+        <h3>6. Acela Express (США)</h3>
+        <p><strong>Країна:</strong> США</p>
+        <p><strong>Виробник:</strong> Bombardier / Alstom</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Acela_Express%2C_North_Station.jpg" alt="Acela Express">
+          <figcaption>Acela Express — американський високошвидкісний поїзд (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 7. Talgo -->
+      <div class="train">
+        <h3>7. Talgo (Іспанія)</h3>
+        <p><strong>Країна:</strong> Іспанія</p>
+        <p><strong>Виробник:</strong> Talgo</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Talgo_350.jpg" alt="Talgo">
+          <figcaption>Talgo — іспанський поїзд з аеродинамічним дизайном (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 8. KTX -->
+      <div class="train">
+        <h3>8. KTX (Південна Корея)</h3>
+        <p><strong>Країна:</strong> Південна Корея</p>
+        <p><strong>Виробник:</strong> Hyundai Rotem</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/KTX_train.jpg" alt="KTX">
+          <figcaption>KTX — південнокорейський високошвидкісний поїзд (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 9. Sapsan -->
+      <div class="train">
+        <h3>9. Sapsan (Росія)</h3>
+        <p><strong>Країна:</strong> Росія</p>
+        <p><strong>Виробник:</strong> Siemens, Transmash</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Sapsan_in_Moscow.jpg" alt="Sapsan">
+          <figcaption>Sapsan — сучасний російський високошвидкісний поїзд (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+      
+      <!-- 10. Frecciarossa 1000 -->
+      <div class="train">
+        <h3>10. Frecciarossa 1000 (Італія)</h3>
+        <p><strong>Країна:</strong> Італія</p>
+        <p><strong>Виробник:</strong> Hitachi Rail Italy</p>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Frecciarossa_1000.jpg" alt="Frecciarossa 1000">
+          <figcaption>Frecciarossa 1000 — сучасний італійський високошвидкісний поїзд (джерело: Wikimedia Commons)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Секція: Інтерактивна карта залізничних шляхів -->
+    <section id="interactive-map">
+      <h2>Інтерактивна карта залізничних шляхів України</h2>
+      <p>
+        Ознайомтеся з мережею залізниць України за допомогою інтерактивної карти нижче. Тут представлені основні міста та маршрути, що допомагають орієнтуватися у великому залізничному просторі країни.
+      </p>
+      <div id="map"></div>
+      <p>
+        Карта побудована з використанням бібліотеки Leaflet на базі даних OpenStreetMap.
+      </p>
+    </section>
+  </main>
+
+  <!-- Підвал сайту -->
+  <footer>
+    <p>&copy; 2025 Залізничний транспорт та історія поїздів. Всі права захищені.</p>
+  </footer>
+
+  <!-- Підключення Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    // Ініціалізація карти із центром по території України
+    var map = L.map('map').setView([48.3794, 31.1656], 6);
+
+    // Додавання шару OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Масив основних міст України
+    var cities = [
+      { name: 'Київ', coords: [50.4501, 30.5234] },
+      { name: 'Львів', coords: [49.8397, 24.0297] },
+      { name: 'Одеса', coords: [46.4825, 30.7233] },
+      { name: 'Харків', coords: [49.9935, 36.2304] },
+      { name: 'Дніпро', coords: [48.4647, 35.0462] }
+    ];
+
+    // Додавання маркерів із підписами
+    cities.forEach(function(city) {
+      L.marker(city.coords).addTo(map)
+        .bindPopup('<b>' + city.name + '</b>');
+    });
+  </script>
+</body>
+</html>
